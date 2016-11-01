@@ -180,4 +180,4 @@
       shell: "source ~/stackrc; openstack baremetal introspection bulk start"
       register: introspection_result
       failed_when: introspection_result.rc != 0
-      when: introspect_nodes | dafault(False)
+      when: introspect_nodes | default(False)
