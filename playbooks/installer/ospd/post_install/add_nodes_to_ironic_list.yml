@@ -10,7 +10,7 @@
 #Configures data network on tester node
 
 - name: Prepare ironic introspection
-  tags: ironic_pre_introspection
+  tags: ironic
   hosts: undercloud
   gather_facts: yes
   become: yes
@@ -27,7 +27,7 @@
 
 
 - name: Create initial tempest.conf file
-  tags: ironic_tempest_conf
+  tags: ironic
   hosts: undercloud
   gather_facts: yes
   tasks:
@@ -54,7 +54,7 @@
 
 
 - name: Enable ironic inspector and required driver
-  tags: ironic_enable_inspector_and_driver
+  tags: ironic
   hosts: undercloud
   gather_facts: yes
   tasks:
@@ -85,6 +85,7 @@
   tags:
       - tester
       - backup
+      - ironic
   hosts: tester
   roles:
       - role: installer/rhos-release
@@ -105,7 +106,7 @@
 
 
 - name: Configure data network on tester node.
-  tags: tester_data_network
+  tags: ironic
   hosts: tester
   gather_facts: yes
   tasks:
@@ -120,6 +121,7 @@
 
 - name: Perform introspection
   hosts: undercloud
+  tags: ironic
   gather_facts: yes
   become: yes
   become_user: "{{ installer.user.name }}"
