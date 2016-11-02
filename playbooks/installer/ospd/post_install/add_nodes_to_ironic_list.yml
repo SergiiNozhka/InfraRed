@@ -16,6 +16,18 @@
   become: yes
   become_user: "{{ installer.user.name }}"
   tasks:
+    - name: verify that instackenv json file exists
+      vars:
+          target: "{{ (inject_instackenv|changed) | ternary((inject_instackenv_name), 'instackenv.json') }}"
+
+      stat:
+          path: "/home/{{ installer.user.name }}/{{ target }}"
+      register: instack_file_path
+
+    - set_fact:
+          instack_file: "{{ instack_file_path.stat.path }}"
+      when: instack_file_path.stat.exists
+
     - name: register our hosts to instack
       shell: "source ~/stackrc; openstack baremetal import --json {{ instack_file }}"
 
