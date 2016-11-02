@@ -17,7 +17,7 @@
   become_user: "{{ installer.user.name }}"
   tasks:
      - name: update flavor propreties with cpu arch
-      shell: "source ~/stackrc; openstack flavor set --property \"cpu_arch\"=\"x86_64\" baremetal"
+       shell: "source ~/stackrc; openstack flavor set --property \"cpu_arch\"=\"x86_64\" baremetal"
 
 
 - name: Create initial tempest.conf file
