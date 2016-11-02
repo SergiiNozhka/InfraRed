@@ -16,14 +16,8 @@
   become: yes
   become_user: "{{ installer.user.name }}"
   tasks:
-    - name: register our hosts to instack
-      shell: "source ~/stackrc; openstack baremetal import --json {{ instack_file }}"
-
-    - name: update flavor propreties with cpu arch
+     - name: update flavor propreties with cpu arch
       shell: "source ~/stackrc; openstack flavor set --property \"cpu_arch\"=\"x86_64\" baremetal"
-
-    - name: assign the kernel and ramdisk before introspection begins
-      shell: "source ~/stackrc; openstack baremetal configure boot"
 
 
 - name: Create initial tempest.conf file
