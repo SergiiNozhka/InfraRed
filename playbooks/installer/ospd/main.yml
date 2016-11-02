@@ -116,10 +116,6 @@
       - name: update neutron DNS server
         shell: "source ~/stackrc; neutron subnet-update {{ subnet_id.stdout }} --dns-nameserver {{ nameserver.stdout }}"
 
-- name: Prepare env for ironic tests
-  tags: ironic
-  include: post_install/add_nodes_to_ironic_list.yml
-
 - name: Tag hosts with flavors
   tags: tagging
   hosts: undercloud
